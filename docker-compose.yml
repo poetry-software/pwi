@@ -52,6 +52,7 @@ services:
     environment:
       - APP_ENV=production
       - APP_URL=https://demo.poetry.software/pwi
+      - ASSET_URL=https://demo.poetry.software/pwi
 
   typesense:
     image: 'typesense/typesense:29.0'
