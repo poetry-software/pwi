@@ -30,9 +30,11 @@ services:
       dockerfile: Dockerfile
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.pwi.rule=Host(`demo.poetry.software`)'
+      - 'traefik.http.routers.pwi.rule=Host(`demo.poetry.software`) && PathPrefix(`/pwi`)'
       - 'traefik.http.routers.pwi.entrypoints=websecure'
       - 'traefik.http.routers.pwi.tls.certresolver=myresolver'
+      - 'traefik.http.routers.pwi.middlewares=pwi-stripprefix'
+      - 'traefik.http.middlewares.pwi-stripprefix.stripprefix.prefixes=/pwi'
       - 'traefik.http.services.pwi.loadbalancer.server.port=8000'
     volumes:
       - type: bind
@@ -51,7 +53,7 @@ services:
       - typesense
     environment:
       - APP_ENV=production
-      - APP_URL=https://demo.poetry.software
+      - APP_URL=https://demo.poetry.software/pwi
 
   typesense:
     image: 'typesense/typesense:29.0'
