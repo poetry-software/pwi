@@ -38,15 +38,14 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --no-dev --prefer-dist --no-interaction
 
 RUN npm install
-RUN npm run build
+RUN npm run build:ssr
 
 RUN mkdir -p /tmp/public/ \
     && cp -r /app/public/* /tmp/public/
 
+ENV OCTANE_SERVER=frankenphp
 RUN yes | php artisan octane:install --server=frankenphp
 
 RUN /usr/bin/crontab /app/docker/crontab
-
-ENV OCTANE_SERVER=frankenphp
 
 ENTRYPOINT ["sh", "/app/docker/entrypoint.sh"]
