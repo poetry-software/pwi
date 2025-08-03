@@ -11,6 +11,11 @@ Route::get('/pwi/dashboard', function () {
     return Inertia::render('dashboard');
 })->name('dashboard');
 
+// Serve /pwi/build/ requests directly from /build/ for assets
+Route::get('/pwi/build/{path}', function ($path) {
+    return response()->file(public_path("build/$path"));
+})->where('path', '.*');
+
 Route::middleware(['auth', 'verified'])->group(function () {});
 
 require __DIR__.'/settings.php';
