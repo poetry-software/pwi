@@ -35,13 +35,13 @@ services:
       - 'traefik.http.routers.pwi.entrypoints=websecure'
       - 'traefik.http.routers.pwi.tls.certresolver=myresolver'
       - 'traefik.http.services.pwi.loadbalancer.server.port=8000'
-      - 'traefik.http.routers.pwi-redirect.rule=Host(`demo.poetry.software`) && PathPrefix(`/pwi/`)'
+      - 'traefik.http.routers.pwi-redirect.rule=Host(`demo.poetry.software`) && (PathPrefix(`/pwi/`) || Path(`/pwi`))'
       - 'traefik.http.routers.pwi-redirect.entrypoints=websecure'
       - 'traefik.http.routers.pwi-redirect.tls.certresolver=myresolver'
       - 'traefik.http.routers.pwi-redirect.middlewares=pwi-redirect'
       - 'traefik.http.routers.pwi-redirect.service=pwi'
-      - 'traefik.http.middlewares.pwi-redirect.redirectregex.regex=^https://demo.poetry.software/pwi/(.*)'
-      - 'traefik.http.middlewares.pwi-redirect.redirectregex.replacement=https://pwi-demo.poetry.software/$${1}'
+      - 'traefik.http.middlewares.pwi-redirect.redirectregex.regex=^https?://demo.poetry.software/pwi(/.*)?'
+      - 'traefik.http.middlewares.pwi-redirect.redirectregex.replacement=https://pwi-demo.poetry.software$${1}'
     volumes:
       - type: bind
         source: ./.env
