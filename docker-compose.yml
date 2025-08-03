@@ -50,8 +50,8 @@ services:
     depends_on:
       - typesense
     environment:
-      - APP_URL=https://demo.poetry.software/pwi
-      - TRUSTED_PROXIES=*
+      - APP_URL=https://demo.poetry.software
+      - TRUSTED_PROXIES=reverse-proxy
       - FORCE_HTTPS=true
 
   typesense:
@@ -72,8 +72,6 @@ services:
       - 'typesense:/typesense-data'
     networks:
       - pwi
-    ports:
-      - '${FORWARD_TYPESENSE_PORT:-8108}:8108'
 
 networks:
   pwi:
