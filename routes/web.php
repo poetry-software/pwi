@@ -3,18 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/pwi', function () {
+Route::get('/', function () {
     return redirect()->route('dashboard');
 })->name('home');
 
-Route::get('/pwi/dashboard', function () {
+Route::get('/dashboard', function () {
     return Inertia::render('dashboard');
 })->name('dashboard');
-
-// Serve /pwi/build/ requests directly from /build/ for assets
-Route::get('/pwi/build/{path}', function ($path) {
-    return response()->file(public_path("build/$path"));
-})->where('path', '.*');
 
 Route::middleware(['auth', 'verified'])->group(function () {});
 
