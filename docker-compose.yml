@@ -30,7 +30,7 @@ services:
       dockerfile: Dockerfile
     labels:
       - 'traefik.enable=true'
-      - 'traefik.http.routers.pwi.rule=Host(`demo.poetry.software`)'
+      - 'traefik.http.routers.pwi.rule=Host(`pwi.demo.poetry.software`)'
       - 'traefik.http.routers.pwi.entrypoints=websecure'
       - 'traefik.http.routers.pwi.tls.certresolver=myresolver'
       - 'traefik.http.services.pwi.loadbalancer.server.port=8000'
