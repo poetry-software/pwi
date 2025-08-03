@@ -50,9 +50,9 @@ services:
     depends_on:
       - typesense
     environment:
+      - APP_ENV=production
       - APP_URL=https://demo.poetry.software
       - TRUSTED_PROXIES=reverse-proxy
-      - FORCE_HTTPS=true
 
   typesense:
     image: 'typesense/typesense:29.0'
