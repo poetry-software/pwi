@@ -21,8 +21,6 @@ services:
     volumes:
       - letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - pwi
   pwi:
     build:
       context: .
