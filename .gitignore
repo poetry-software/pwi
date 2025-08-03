@@ -22,3 +22,7 @@ yarn-error.log
 /.nova
 /.zed
 /.pnpm-store
+
+**/caddy
+frankenphp
+frankenphp-worker.php
